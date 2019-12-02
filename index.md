@@ -10,6 +10,37 @@ Markdown is a lightweight and easy-to-use syntax for styling your writing. It in
 
 ```markdown
 Syntax highlighted code block
+package com.Sammyshe;
+
+import com.mysql.jdbc.Driver;
+
+import java.sql.*;
+
+public class JDBCDemo001 {
+    public static void main(String[] args){
+        try {
+            //*载入驱动
+            DriverManager.deregisterDriver(new Driver());
+            //*建立连接
+            Connection root = DriverManager.getConnection("jdbc:mysql://localhost/test1", "root", "123");
+            //*创建statement！！！一定要！
+            Statement statement = root.createStatement();
+            //执行查询
+            String sql="select * from user";
+            ResultSet resultSet = statement.executeQuery(sql);
+            while(resultSet.next()){
+                int id=resultSet.getInt("id");
+                String user = resultSet.getString("username");
+                String pws = resultSet.getString("password");
+                //boolean is_vip = resultSet.getBoolean("is_vip");
+                System.out.println("id="+id+"user="+user+pws);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
 
 # Header 1
 ## Header 2
